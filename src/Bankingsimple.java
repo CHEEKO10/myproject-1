@@ -21,11 +21,11 @@ public class Bankingsimple {
                 switch (key) {
                     case 1 -> {
                         balance =  balance + deposit();
-                        System.out.println(balance);
+                        System.out.println("Amount is been credited to your bank account");
                     }
                     case 2-> {
-                        System.out.println("Enter the amount to be withdrawn :");
-                        balance = balance-withdrawal();
+                        balance = balance-withdrawal(balance);
+                        System.out.println("Amount is been debited from your bank account");
                     }
                     case 3 ->{
                         System.out.println("Show balance");
@@ -48,10 +48,20 @@ public class Bankingsimple {
     static void showBalance(double balance){
         System.out.printf("$%f\n",balance);
     }
-    static double withdrawal(){
+    static double withdrawal(double balance){
         double amount ;
         System.out.println("Enter the amount to be withdrawn ");
         amount = scanner.nextDouble();
-        return amount ;
+        if(amount>balance){
+            System.out.println("Insufficient fund");
+            return 0;
+        }
+        else if(amount<0){
+            System.out.println("Amount cant be in negative");
+            return 0;
+        }
+        else {
+            return amount;
+        }
     }
 }
